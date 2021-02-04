@@ -3,3 +3,15 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+* {
+  background: #blue;
+  border: 1px solid #43a3e6;
+  justify-content: center;
+  justify-content: space-evenly;
+  border-radius: 6px;
+  box-shadow: 1px 1px 2px #999;
+  color: #fff;
+  padding: 6px 14px;
+  outline: 0;
+}
