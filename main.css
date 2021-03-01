@@ -5,7 +5,7 @@
 }
 
 * {
-  background: #blue;
+  background: blue;
   border: 1px solid #43a3e6;
   justify-content: center;
   justify-content: space-evenly;
@@ -39,4 +39,8 @@ button {
 
 body {
   font-size: 50px;
+}
+
+#dashes {
+  display: flex;
 }

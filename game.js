@@ -4,27 +4,28 @@ function makeRandomWord() {
   const filteredWords = commonWords.filter((word) => word.length >= 3);
   // filteredWords [0]
   const randomIndex = Math.floor(Math.random() * filteredWords.length);
-  const randomword = filteredWords[randomIndex];
+  const randomWord = filteredWords[randomIndex];
   return randomWord;
 }
-const randomword = makeRandomWord();
+const randomWord = makeRandomWord();
 // make dashes from a random word
-//console.log(randomword)
+
 const dashContainer = document.querySelector("#dashes");
 const btnContainer = document.querySelector("#btns");
 const guesses = [];
-console.log(randomword);
+console.log(randomWord);
+
 function makeDashes(word, guesses) {
   const wordArry = word.split("").map((letter) => {
     const showLetter = guesses.includes(letter);
     const letterOrNot = showLetter ? letter : "";
-    console.log(letter);
-    return `div class="dash">${letterOrNot}</div>`;
+    // console.log(letter);
+    return `<div class="dash">${letterOrNot}</div>`;
   });
   const dashString = wordArry.join("");
   dashContainer.innerHTML = dashString;
 }
-makeDashes(randomword, guesses);
+makeDashes(randomWord, guesses);
 
 function makeButtons() {
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
@@ -38,19 +39,29 @@ function makeButtons() {
   //   btnString += `<button>${alphabet.charAt(i)}</button>`;
   // }
 }
-makeDashes(randomword, guesses);
+makeDashes(randomWord, guesses);
 
 makeButtons();
+
+let lives = 8;
+document.querySelector("#countDown").innerHTML = lives;
+
 function handleUserGuess(e) {
   const currButton = e.target;
   const letter = currButton.innerHTML;
-  const letterIsInWord = randomword.includes(letter);
+  const letterIsInWord = randomWord.includes(letter);
   guesses.push(letter);
   if (letterIsInWord) {
     console.log("letter in word");
-    makeDashes(randomword, guesses);
+    makeDashes(randomWord, guesses);
   } else {
-    console.log("letter NOT in word");
+    lives--;
+    console.log(lives);
+    document.querySelector("#countDown").innerHTML = lives;
+  }
+
+  if (lives == 0) {
+    alert("GAMEOVER LOSER!");
   }
   //console.log(letter)
 
