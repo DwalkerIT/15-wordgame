@@ -1,5 +1,59 @@
-import { commonWords } from "./constants";
-console.log(commonWords);
+// import { commonWords } from "./constants";
+
+function makeRandomWord() {
+  const filteredWords = commonWords.filter((word) => word.length >= 3);
+  const randomIndex = Math.floor(Math.random() * filteredWords.length);
+  const randomword = filteredWords[randomIndex];
+  return randomWord;
+}
+const randomword = makeRandomWord();
+
+const dashContainer = document.querySelector("#dashes");
+const btnContainer = document.querySelector("#btns");
+
+function makeDashes(word, guesses) {
+  const wordArry = word.split("").map((letter) => {
+    const showLetter = guesses.includes(letter);
+    const letterOrNot = showLetter ? letter : "";
+    return `div class="dash">${letterOrNot}</div>`;
+  });
+  const dashString = wordArry.join("");
+
+  dashContainer.innerHTML = dashString;
+}
+
+makeDashes(randomword, []);
+
+function makeButtons() {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  // let btnString = "";
+  // for (let i = 0; 1 < alphabet.length; i++) {
+  //   btnString += `<button>${alphabet.charAt(i)}</button>`;
+  // }
+  const btnString = alphabet
+    .split("")
+    .map((letter) => `<button>${letter}</button>`)
+    .join("");
+
+  btnContainer.innerHTML = btnString;
+}
+makeButtons();
+
+const guesses = [];
+
+function handleUserGuess(e) {
+  const currButton = e.target;
+  const letter = currButton.innerHTML;
+  const letterIsInWord = randomword.includes(letter);
+  guesses.push(letter);
+  if (letterIsInWord) {
+    console.log("letter in word");
+  } else {
+    console.log("letter NOT in word");
+  }
+}
+
+btnContainer.addEventListener("click", handleUserGuess);
 
 //choose a random word of 4 or more letters
 const fourOrMore = commonWords.filter(function (item) {
@@ -12,26 +66,26 @@ const fourOrMore = commonWords.filter(function (item) {
 //filter the constants with >=3 words -
 
 // get the random word to guess -
-const btn = document.querySelector("#buttons");
-btn.addEventListener("click", handleBtnClick);
-const btns = "abcdefghijklmnopqrstuvwxyz";
-const randomword = commonWords[0];
-console.log(randomword);
-const numTimes = randomword.length;
-console.log(numTimes);
-let newString = "";
+// const btn = document.querySelector("#buttons");
+// btn.addEventListener("click", handleBtnClick);
+// // const btns = "abcdefghijklmnopqrstuvwxyz";
+// const randomword = commonWords[0];
+// console.log(randomword);
+// const numTimes = randomword.length;
+// console.log(numTimes);
+// let newString = "";
 
-for (let i = 0; i < 8; i++) {
-  newString = newString = +"-";
-}
+// for (let i = 0; i < 8; i++) {
+//   newString = newString = +"-";
+// }
 
-function dash(str) {
-  let hiddenWord = "";
-  for (let i = 0; i < str.length; i++) {
-    hiddenWord += " _ ";
-  }
-  return hiddenWord;
-}
+// function dash(str) {
+//   let hiddenWord = "";
+//   for (let i = 0; i < str.length; i++) {
+//     hiddenWord += " _ ";
+//   }
+//   return hiddenWord;
+// }
 //get the length of the word and show the letters in dashes
 
 //show how many guesses - 8 guesses -
