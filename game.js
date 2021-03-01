@@ -1,46 +1,46 @@
-// import { commonWords } from "./constants";
-
+import { commonWords } from "./constants";
+console.log(commonWords);
 function makeRandomWord() {
   const filteredWords = commonWords.filter((word) => word.length >= 3);
+  // filteredWords [0]
   const randomIndex = Math.floor(Math.random() * filteredWords.length);
   const randomword = filteredWords[randomIndex];
   return randomWord;
 }
 const randomword = makeRandomWord();
-
+// make dashes from a random word
+//console.log(randomword)
 const dashContainer = document.querySelector("#dashes");
 const btnContainer = document.querySelector("#btns");
-
+const guesses = [];
+console.log(randomword);
 function makeDashes(word, guesses) {
   const wordArry = word.split("").map((letter) => {
     const showLetter = guesses.includes(letter);
     const letterOrNot = showLetter ? letter : "";
+    console.log(letter);
     return `div class="dash">${letterOrNot}</div>`;
   });
   const dashString = wordArry.join("");
-
   dashContainer.innerHTML = dashString;
 }
-
-makeDashes(randomword, []);
+makeDashes(randomword, guesses);
 
 function makeButtons() {
   const alphabet = "abcdefghijklmnopqrstuvwxyz";
-  // let btnString = "";
-  // for (let i = 0; 1 < alphabet.length; i++) {
-  //   btnString += `<button>${alphabet.charAt(i)}</button>`;
-  // }
   const btnString = alphabet
     .split("")
     .map((letter) => `<button>${letter}</button>`)
     .join("");
-
   btnContainer.innerHTML = btnString;
+  // let btnString = "";
+  // for (let i = 0; 1 < alphabet.length; i++) {
+  //   btnString += `<button>${alphabet.charAt(i)}</button>`;
+  // }
 }
+makeDashes(randomword, guesses);
+
 makeButtons();
-
-const guesses = [];
-
 function handleUserGuess(e) {
   const currButton = e.target;
   const letter = currButton.innerHTML;
@@ -48,17 +48,24 @@ function handleUserGuess(e) {
   guesses.push(letter);
   if (letterIsInWord) {
     console.log("letter in word");
+    makeDashes(randomword, guesses);
   } else {
     console.log("letter NOT in word");
   }
+  //console.log(letter)
+
+  //is my letter in the random word?
+
+  //if it is....update the dashes...update
+  //otherwise - decrease life
 }
 
 btnContainer.addEventListener("click", handleUserGuess);
 
-//choose a random word of 4 or more letters
-const fourOrMore = commonWords.filter(function (item) {
-  return item.length >= 4;
-});
+// //choose a random word of 4 or more letters
+// const fourOrMore = commonWords.filter(function (item) {
+//   return item.length >= 4;
+// });
 //allow the user one guess at a time
 
 // create buttons for the letters -
@@ -91,45 +98,45 @@ const fourOrMore = commonWords.filter(function (item) {
 //show how many guesses - 8 guesses -
 
 // Make buttons
-function makeButtons() {
-  const alphabet = "abcdefghijklmnopqrstuvwxyz";
-  const alphaArray = alphabet.split("");
-  const htmlList = alphaArray
-    .map(function (letter) {
-      return `<button>${letter}</button>`;
-    })
-    .join("");
-  // btnContainer.innerHTML = htmlList
-  return htmlList;
-}
+// function makeButtons() {
+//   const alphabet = "abcdefghijklmnopqrstuvwxyz";
+//   const alphaArray = alphabet.split("");
+//   const htmlList = alphaArray
+//     .map(function (letter) {
+//       return `<button>${letter}</button>`;
+//     })
+//     .join("");
+//   // btnContainer.innerHTML = htmlList
+//   return htmlList;
+// }
 
-const htmlString = makeButtons();
-console.log(makeButtons());
-btnContainer.innerHTML = htmlString;
+// const htmlString = makeButtons();
+// console.log(makeButtons());
+// btnContainer.innerHTML = htmlString;
 
-btnContainer.addEventListener("click");
+// btnContainer.addEventListener("click");
 
-//user to click letter button to guess and get that value
-//if the guess letter includes the guess word, show it
-// if incorrect decrease life and disable button
-let lifeCountdown = loseLife;
-let Countdown = 8;
-const tracker = document.querySelector("#count");
-tracker.innerHTML = countDown;
-function loseLife(num) {
-  if (clickCount) {
-    countDown = countDown;
-  } else {
-    countdown--;
-    console.log(lifeCountdown);
-  }
-}
-// if number guess = 0 then alert LOSER
-// if not 0 can guess again
+// //user to click letter button to guess and get that value
+// //if the guess letter includes the guess word, show it
+// // if incorrect decrease life and disable button
+// let lifeCountdown = loseLife;
+// let Countdown = 8;
+// const tracker = document.querySelector("#count");
+// tracker.innerHTML = countDown;
+// function loseLife(num) {
+//   if (clickCount) {
+//     countDown = countDown;
+//   } else {
+//     countdown--;
+//     console.log(lifeCountdown);
+//   }
+// }
+// // if number guess = 0 then alert LOSER
+// // if not 0 can guess again
 
-//have it click 8 times and disable it
+// //have it click 8 times and disable it
 
-//how do i get user input
+// //how do i get user input
 
 let clickCount = 0;
 function handleBtnClick(e) {
